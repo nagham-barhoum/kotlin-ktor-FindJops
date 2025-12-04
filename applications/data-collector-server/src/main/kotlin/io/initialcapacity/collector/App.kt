@@ -1,29 +1,30 @@
-package io.initialcapacity.collector
+package com.analyzer
 
-// import io.initialcapacity.workflow.WorkScheduler
-import io.ktor.http.ContentType
-import io.ktor.server.application.Application
-import io.ktor.server.application.call
-import io.ktor.server.application.install
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.Routing
-import io.ktor.server.routing.get
-import java.util.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.freemarker.*
+import components.data_analyzer.AnalyzerRunner
 
-// fun Application.module() {
-//     install(Routing) {
-//         get("/") {
-//             call.respondText("hi!", ContentType.Text.Html)
-//         }
-//     }
-//     val scheduler = WorkScheduler<ExampleTask>(ExampleWorkFinder(), mutableListOf(ExampleWorker()), 30)
-//     scheduler.start()
-// }
+fun Application.module() {
+    val analyzerRunner = AnalyzerRunner()
 
-// fun main() {
-//     TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
-//     val port = System.getenv("PORT")?.toInt() ?: 8886
-//     embeddedServer(Netty, port = port, host = "0.0.0.0", module = { module() }).start(wait = true)
-// }
+    install(Routing) {
+        get("/it-jobs") {
+            val results = analyzerRunner.analyzeAllJobs()
+            call.respond(results) // JSON
+        }
+
+        get("/it-jobs-html") {
+            val results = analyzerRunner.analyzeAllJobs()
+            call.respond(FreeMarkerContent("jobs.ftl", mapOf("jobs" to results)))
+        }
+    }
+}
+
+fun main() {
+    val port = System.getenv("PORT")?.toInt() ?: 8887
+    embeddedServer(Netty, port = port, host = "0.0.0.0", module = { module() }).start(wait = true)
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>وظائف IT محللة</title>
+</head>
+<body>
+<h1>وظائف IT</h1>
+<#list jobs as job>
+    <div>
+        <h3>${job.title}</h3>
+        <p>شركة: ${job.company}</p>
+        <p>Tags: ${job.tags?join(", ")}</p>
+    </div>
+</#list>
+</body>
+</html>

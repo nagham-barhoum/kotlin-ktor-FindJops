@@ -1,6 +1,6 @@
 package io.initialcapacity.analyzer
 
-import io.initialcapacity.workflow.WorkScheduler
+
 import io.ktor.http.ContentType
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
@@ -13,17 +13,16 @@ import io.ktor.server.routing.get
 import java.util.*
 
 fun Application.module() {
-    install(Routing) {
-        get("/") {
-            call.respondText("hi!", ContentType.Text.Html)
+    val analyzer = AnalyzerRunner()
+
+    routing {
+        get("/it-jobs") {
+            val data = analyzer.analyzeAllJobs()
+            call.respond(data)
         }
     }
-    val scheduler = WorkScheduler<ExampleTask>(ExampleWorkFinder(), mutableListOf(ExampleWorker()), 30)
-    scheduler.start()
 }
 
 fun main() {
-    TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
-    val port = System.getenv("PORT")?.toInt() ?: 8887
-    embeddedServer(Netty, port = port, host = "0.0.0.0", module = { module() }).start(wait = true)
+    embeddedServer(Netty, port = 8887, host = "0.0.0.0", module = { module() }).start(wait = true)
 }
