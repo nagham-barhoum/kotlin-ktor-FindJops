@@ -32,10 +32,10 @@ subprojects {
         implementation("org.slf4j:slf4j-api:2.0.7")
 
         // Exposed ORM + SQLite
-        implementation("org.jetbrains.exposed:exposed-core:0.42.0")
-        implementation("org.jetbrains.exposed:exposed-dao:0.42.0")
-        implementation("org.jetbrains.exposed:exposed-jdbc:0.42.0")
-        implementation("org.jetbrains.exposed:exposed-java-time:0.42.0")
+        implementation("org.jetbrains.exposed:exposed-core:0.41.1")
+        implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
+        implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+        implementation("org.jetbrains.exposed:exposed-java-time:0.41.1")
         implementation("org.xerial:sqlite-jdbc:3.42.0.0")
 
         // Ktor Server
