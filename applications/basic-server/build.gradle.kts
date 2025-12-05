@@ -7,6 +7,7 @@ group = "io.initialcapacity.web"
 val ktorVersion: String by project
 
 dependencies {
+    
     implementation(project(":components:data-analyzer"))
     implementation(project(":support:logging-support"))
     implementation(project(":support:workflow-support"))
@@ -14,6 +15,11 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-freemarker-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+// Ktor Client
+implementation("io.ktor:ktor-client-core-jvm:$ktorVersion")
+implementation("io.ktor:ktor-client-cio-jvm:$ktorVersion")
+implementation("io.ktor:ktor-client-content-negotiation-jvm:$ktorVersion")
+implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
 }

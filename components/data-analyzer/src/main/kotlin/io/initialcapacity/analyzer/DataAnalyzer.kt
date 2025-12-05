@@ -1,26 +1,21 @@
-package components.data_analyzer
+package io.initialcapacity.analyzer
 
-import models.JobPosting
+import io.initialcapacity.collector.domains.models.JobPosting
 
 class DataAnalyzer {
 
-    fun analyze(job: JobPosting): AnalyzedJob? {
-        val title = job.position?.lowercase() ?: ""
+    fun analyze(job: JobPosting): AnalyzedJob {
+        val lowerTitle = job.title.lowercase()
 
-        val tags = mutableListOf<String>()
-
-        if ("backend" in title) tags.add("backend")
-        if ("laravel" in title) tags.add("laravel")
-        if ("devops" in title) tags.add("devops")
-        if ("engineer" in title) tags.add("engineer")
-
-        if (tags.isEmpty()) return null  // مالو اختصاص IT → منطنشو
+        val isBackend = "backend" in lowerTitle
+        val isJunior = "junior" in lowerTitle
 
         return AnalyzedJob(
-            id = job.id,
-            title = job.position ?: "",
-            company = job.company ?: "",
-            tags = tags
+            title = job.title,
+            location = job.location,
+            company = job.company,
+            isBackend = isBackend,
+            isJunior = isJunior
         )
     }
 }

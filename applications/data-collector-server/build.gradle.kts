@@ -11,6 +11,7 @@ dependencies {
 
     implementation(project(":components:data-collector"))
     implementation(project(":support:workflow-support"))
+    implementation(project(":components:data-analyzer"))
 
     implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
     implementation("io.ktor:ktor-server-freemarker-jvm:$ktorVersion")

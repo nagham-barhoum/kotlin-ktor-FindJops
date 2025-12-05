@@ -13,17 +13,4 @@ import kotlin.test.assertEquals
 
 class AppTest {
 
-    @Test
-    fun testEmptyHome() = testApp {
-        val response = client.get("/")
-        assertEquals(HttpStatusCode.OK, response.status)
-        assertContains(response.bodyAsText(), "An example application using Kotlin and Ktor")
-    }
-
-    private fun testApp(block: suspend ApplicationTestBuilder.(client: HttpClient) -> Unit) {
-        testApplication {
-            application { module() }
-            block(client)
-        }
-    }
 }

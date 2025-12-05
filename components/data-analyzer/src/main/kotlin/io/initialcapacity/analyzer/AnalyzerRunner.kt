@@ -1,16 +1,13 @@
-package components.data_analyzer
+package io.initialcapacity.analyzer
 
-import db.DatabaseManager
+import io.initialcapacity.collector.domains.database.JobPostingRepository
 
-class AnalyzerRunner {
+class AnalyzerRunner(private val repository: JobPostingRepository) {
 
-   
     private val analyzer = DataAnalyzer()
 
     fun analyzeAllJobs(): List<AnalyzedJob> {
-        val allJobs = DatabaseManager.getAllJobs()
-        return allJobs.mapNotNull { job ->
-            analyzer.analyze(job) // إذا null → مالو اختصاص IT → يتجاهل
-        }
+        val jobs = repository.getAllJobs()
+        return jobs.map { analyzer.analyze(it) }
     }
 }

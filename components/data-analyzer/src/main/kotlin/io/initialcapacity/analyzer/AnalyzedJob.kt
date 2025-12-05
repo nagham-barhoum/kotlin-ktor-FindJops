@@ -1,8 +1,9 @@
-package components.data_analyzer
+package io.initialcapacity.analyzer
 
 data class AnalyzedJob(
-    val id: Int,
     val title: String,
+    val location: String,
     val company: String,
-    val tags: List<String>
+    val isBackend: Boolean,
+    val isJunior: Boolean
 )

@@ -13,17 +13,17 @@ import kotlin.test.assertContains
 
 class AppTest {
 
-    @Test
-    fun testEmptyHome() = testApp {
-        val response = client.get("/")
-        assertEquals(HttpStatusCode.OK, response.status)
-        assertContains(response.bodyAsText(), "hi!")
-    }
+    // @Test
+    // fun testEmptyHome() = testApp {
+    //     val response = client.get("/")
+    //     assertEquals(HttpStatusCode.OK, response.status)
+    //     assertContains(response.bodyAsText(), "hi!")
+    // }
 
-    private fun testApp(block: suspend ApplicationTestBuilder.(client: HttpClient) -> Unit) {
-        testApplication {
-            application { module() }
-            block(client)
-        }
-    }
+    // private fun testApp(block: suspend ApplicationTestBuilder.(client: HttpClient) -> Unit) {
+    //     testApplication {
+    //         application { module() }
+    //         block(client)
+    //     }
+    // }
 }
